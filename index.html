@@ -10,6 +10,10 @@
         const ROCK = 0;
         const PAPER = 1;
         const SCISSORS = 2;
+
+        const LOSE = 0;
+        const WIN = 1;
+        const DRAW = 2;
         
         let getRandomIntFromRange = range => Math.floor(Math.random() * range);
 
@@ -19,7 +23,6 @@
         }
 
         function playRound(playerSelection, computerSelection) {
-            //let numberPlayerSel;
             playerSelection = playerSelection.toLowerCase();
             switch (playerSelection) {
                 case 'rock':
@@ -32,49 +35,61 @@
                     playerSelection = SCISSORS;
                     break;
                 default:
-                    return "Invalid input, Try Again!";
+                    return undefined;
             }
 
             let res;
+            let message;
             if (playerSelection == ROCK) {
                 switch (computerSelection) {
                     case ROCK:
-                        res = "It's a Draw! Both chose Rock";
+                        res = DRAW; 
+                        message = "It's a Draw! Both chose Rock";
                         break;
                     case PAPER:
-                        res = "You Lose! Paper beats Rock";
+                        res = LOSE; 
+                        message = "You Lose! Paper beats Rock";
                         break;
                     case SCISSORS:
-                        res = "You Win! Rock beats Scissors";
+                        res = WIN;
+                        message = "You Win! Rock beats Scissors";
                         break;
                 }
             } else if (playerSelection == PAPER) {
                 switch (computerSelection) {
                     case ROCK:
-                        res = "You Win! Paper beats Rock";
+                        res = WIN;
+                        message = "You Win! Paper beats Rock";
                         break;
                     case PAPER:
-                        res = "It's a Draw! Both chose Paper";
+                        res = DRAW; 
+                        message = "It's a Draw! Both chose Paper";
                         break;
                     case SCISSORS:
-                        res = "You Lose! Scissors beats Paper";
+                        res = LOSE; 
+                        message = "You Lose! Scissors beats Paper";
                         break;
                 }
             } else { //playerSelection == SCISSORS
                 switch (computerSelection) {
                     case ROCK:
-                        res = "You Lose! Rock beats Scissors";
+                        res = LOSE;
+                        message = "You Lose! Rock beats Scissors";
                         break;
                     case PAPER:
-                        res = "You Win! Scissors beats Paper";
+                        res = WIN;
+                        message = "You Win! Scissors beats Paper";
                         break;
                     case SCISSORS:
-                        res = "It's a Draw! Both chose Scissors";
+                        res = DRAW; 
+                        message = "It's a Draw! Both chose Scissors";
                         break;
                 }
             }
-            
-            return res;
+            return {res, message};
+        }
+        
+        }
         }
     </script>
 </body>
