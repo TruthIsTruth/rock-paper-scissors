@@ -17,6 +17,65 @@
             let choice = getRandomIntFromRange(3); //Range=[0,3)
             return choice;
         }
+
+        function playRound(playerSelection, computerSelection) {
+            //let numberPlayerSel;
+            playerSelection = playerSelection.toLowerCase();
+            switch (playerSelection) {
+                case 'rock':
+                    playerSelection = ROCK;
+                    break;
+                case 'paper':
+                    playerSelection = PAPER;
+                    break;
+                case 'scissors':
+                    playerSelection = SCISSORS;
+                    break;
+                default:
+                    return "Invalid input, Try Again!";
+            }
+
+            let res;
+            if (playerSelection == ROCK) {
+                switch (computerSelection) {
+                    case ROCK:
+                        res = "It's a Draw! Both chose Rock";
+                        break;
+                    case PAPER:
+                        res = "You Lose! Paper beats Rock";
+                        break;
+                    case SCISSORS:
+                        res = "You Win! Rock beats Scissors";
+                        break;
+                }
+            } else if (playerSelection == PAPER) {
+                switch (computerSelection) {
+                    case ROCK:
+                        res = "You Win! Paper beats Rock";
+                        break;
+                    case PAPER:
+                        res = "It's a Draw! Both chose Paper";
+                        break;
+                    case SCISSORS:
+                        res = "You Lose! Scissors beats Paper";
+                        break;
+                }
+            } else { //playerSelection == SCISSORS
+                switch (computerSelection) {
+                    case ROCK:
+                        res = "You Lose! Rock beats Scissors";
+                        break;
+                    case PAPER:
+                        res = "You Win! Scissors beats Paper";
+                        break;
+                    case SCISSORS:
+                        res = "It's a Draw! Both chose Scissors";
+                        break;
+                }
+            }
+            
+            return res;
+        }
     </script>
 </body>
 </html>
