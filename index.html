@@ -7,7 +7,16 @@
 </head>
 <body>
     <script>
+        const ROCK = 0;
+        const PAPER = 1;
+        const SCISSORS = 2;
         
+        let getRandomIntFromRange = range => Math.floor(Math.random() * range);
+
+        function getComputerChoice() {
+            let choice = getRandomIntFromRange(3); //Range=[0,3)
+            return choice;
+        }
     </script>
 </body>
 </html>
