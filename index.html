@@ -89,7 +89,49 @@
             return {res, message};
         }
         
-        }
+        function game(){
+            //Play 5 rounds
+            //Keep score of the user and computer
+            //For each round,
+            //  get input from user
+            //  playRound() and update score
+            //  display winner of this round
+            //Display overall winner
+
+            let winsUser = 0;
+            let winsComputer = 0;
+
+            for (let i = 0; i < 5; i++) {
+                let computerChoice = getComputerChoice();
+                let userChoice = window.prompt("Enter your choice (Rock, Paper or Scissors):");
+                if (userChoice === null) break;
+                
+                let result = playRound(userChoice, computerChoice);
+                while (result === undefined) {
+                    userChoice = window.prompt("Invalid input! (Rock, Paper or Scissors), Try again:");
+                    result = playRound(userChoice, computerChoice);
+                }
+
+                if (result.res === LOSE)
+                    winsComputer++;
+                else if (result.res === WIN)
+                    winsUser++;
+
+                console.log(result.message);
+            }
+
+            let finalMessage = `Final result:
+            Player wins: ${winsUser}
+            Computer wins: ${winsComputer}`;
+            if (winsUser < winsComputer){
+                finalMessage += '\nThe winner is the computer!' 
+            } else if (winsUser > winsComputer) {
+                finalMessage += '\nThe winner is the player!' 
+            } else { //Draw
+                finalMessage += '\nNo one wins!'
+            }
+
+            console.log(finalMessage);
         }
     </script>
 </body>
