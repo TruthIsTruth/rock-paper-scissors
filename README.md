@@ -10,4 +10,4 @@ In this project I learned:
 - How to randomly select a choice
 - How to use conditionals to decide the winner
 - How to use functions to make cleaner code
-- How to manipulate the DOM to interact with buttons text message that shows in the page.
+- How to manipulate the DOM to interact with buttons and text content.
