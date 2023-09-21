@@ -6,6 +6,10 @@
     <title>Rock Paper Scissors</title>
 </head>
 <body>
+    <button id="rock" class="btn">Rock</button>
+    <button id="paper" class="btn">Paper</button>
+    <button id="scissors" class="btn">Scissors</button>
+
     <script>
         const ROCK = 0;
         const PAPER = 1;
@@ -134,7 +138,15 @@
             console.log(finalMessage);
         }
 
-        game();
+        //game();
+        
+        const buttons = document.querySelectorAll('.btn');
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const result = playRound(button.id, getComputerChoice());
+                console.log(result.message);
+            });
+        })
     </script>
 </body>
 </html>
