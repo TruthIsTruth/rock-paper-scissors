@@ -128,9 +128,11 @@ function game() {
 //game();
 
 const buttons = document.querySelectorAll('.btn');
+const div = document.querySelector('#msg');
+
 buttons.forEach(button => {
     button.addEventListener('click', () => {
         const result = playRound(button.id, getComputerChoice());
-        console.log(result.message);
+        div.textContent = result.message;
     });
 })
