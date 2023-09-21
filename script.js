@@ -80,7 +80,7 @@ function playRound(playerSelection, computerSelection) {
     return { res, message };
 }
 
-function game() {
+function game(e) {
     //Play 5 rounds
     //Keep score of the user and computer
     //For each round,
@@ -89,50 +89,47 @@ function game() {
     //  display winner of this round
     //Display overall winner
 
-    let winsUser = 0;
-    let winsComputer = 0;
+    const userChoice = e.target.id;
+    const result = playRound(userChoice, getComputerChoice());
 
-    for (let i = 0; i < 5; i++) {
-        let computerChoice = getComputerChoice();
-        let userChoice = window.prompt("Enter your choice (Rock, Paper or Scissors):");
-        if (userChoice === null) break;
+    if (result.res === LOSE)
+        winsComputer++;
+    else if (result.res === WIN)
+        winsUser++;
 
-        let result = playRound(userChoice, computerChoice);
-        while (result === undefined) {
-            userChoice = window.prompt("Invalid input! (Rock, Paper or Scissors), Try again:");
-            result = playRound(userChoice, computerChoice);
+    if (winsComputer < 5 && winsUser < 5) {
+        const msg = `Partial result:<br>
+        Player wins: ${winsUser}<br>
+        Computer wins: ${winsComputer}<br>
+        ${result.message}`;
+
+        div.innerHTML = msg;
+    } else {
+        let finalMessage = `Final result:<br>
+            Player wins: ${winsUser}<br>
+            Computer wins: ${winsComputer}<br>`;
+        if (winsUser < winsComputer) {
+            finalMessage += '\nThe winner is the computer!'
+        } else if (winsUser > winsComputer) {
+            finalMessage += '\nThe winner is the player!'
+        } else { //Draw (Should be unreachable)
+            finalMessage += '\nNo one wins!'
         }
 
-        if (result.res === LOSE)
-            winsComputer++;
-        else if (result.res === WIN)
-            winsUser++;
+        div.innerHTML = finalMessage;
 
-        console.log(result.message);
+        buttons.forEach(button => {
+            button.removeEventListener('click', game)
+        })
     }
-
-    let finalMessage = `Final result:
-            Player wins: ${winsUser}
-            Computer wins: ${winsComputer}`;
-    if (winsUser < winsComputer) {
-        finalMessage += '\nThe winner is the computer!'
-    } else if (winsUser > winsComputer) {
-        finalMessage += '\nThe winner is the player!'
-    } else { //Draw
-        finalMessage += '\nNo one wins!'
-    }
-
-    console.log(finalMessage);
 }
 
-//game();
+let winsUser = 0;
+let winsComputer = 0;
 
 const buttons = document.querySelectorAll('.btn');
 const div = document.querySelector('#msg');
 
 buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const result = playRound(button.id, getComputerChoice());
-        div.textContent = result.message;
-    });
+    button.addEventListener('click', game);
 })
